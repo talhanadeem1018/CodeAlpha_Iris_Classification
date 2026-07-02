@@ -1,4 +1,5 @@
 import pandas as pd
+from sklearn.model_selection import train_test_split
 
 print("TEST: Python is running the correct file")
 
@@ -53,5 +54,27 @@ def main():
     
     print("\nTarget (y):")
     print(y.head())
+    # -------------------------------
+    # Train-Test Split
+    # -------------------------------
+
+    X_train, X_test, y_train, y_test = train_test_split(
+        X,
+        y,
+        test_size=0.2,
+        random_state=42
+    )
+
+    print("\nTraining Features Shape:")
+    print(X_train.shape)
+
+    print("\nTesting Features Shape:")
+    print(X_test.shape)
+
+    print("\nTraining Labels Shape:")
+    print(y_train.shape)
+
+    print("\nTesting Labels Shape:")
+    print(y_test.shape)
 if __name__ == "__main__":
     main()
