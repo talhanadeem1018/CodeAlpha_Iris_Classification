@@ -1,5 +1,8 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
 print("TEST: Python is running the correct file")
 
@@ -76,5 +79,67 @@ def main():
 
     print("\nTesting Labels Shape:")
     print(y_test.shape)
+    
+    # -------------------------------
+    # Feature Scaling
+    # -------------------------------
+
+    scaler = StandardScaler()
+
+    # Fit and transform the training data
+    X_train_scaled = scaler.fit_transform(X_train)
+
+    # Transform the testing data
+    X_test_scaled = scaler.transform(X_test)
+
+    print("\nScaled Training Features (First 5 Rows):")
+    print(X_train_scaled[:5])
+
+    print("\nScaled Testing Features (First 5 Rows):")
+    print(X_test_scaled[:5])
+    # -------------------------------
+    # Train Random Forest Model
+    # -------------------------------
+
+    model = RandomForestClassifier(random_state=42)
+
+    model.fit(X_train_scaled, y_train)
+
+    print("\nRandom Forest model trained successfully!")
+    
+    # -------------------------------
+    # Make Predictions
+    # -------------------------------
+    
+    y_pred = model.predict(X_test_scaled)
+    
+    print("\nActual Labels:")
+    print(y_test.values)
+    
+    print("\nPredicted Labels:")
+    print(y_pred)
+    
+    # -------------------------------
+    # Model Accuracy
+    # -------------------------------
+
+    accuracy = accuracy_score(y_test, y_pred)
+
+    print("\nModel Accuracy:")
+    print(f"{accuracy * 100:.2f}%")
+    
+    # -------------------------------
+    # Classification Report
+    # -------------------------------
+
+    print("\nClassification Report:")
+    print(classification_report(y_test, y_pred))
+    
+    # -------------------------------
+    # Confusion Matrix
+    # -------------------------------
+    
+    print("\nConfusion Matrix:")
+    print(confusion_matrix(y_test, y_pred))
 if __name__ == "__main__":
     main()
