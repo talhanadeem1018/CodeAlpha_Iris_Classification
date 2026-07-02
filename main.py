@@ -4,7 +4,6 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
-print("TEST: Python is running the correct file")
 
 def main():
     print("=" * 50)
@@ -138,7 +137,7 @@ def main():
     # -------------------------------
     # Confusion Matrix
     # -------------------------------
-    
+
     print("\nConfusion Matrix:")
     print(confusion_matrix(y_test, y_pred))
 if __name__ == "__main__":
